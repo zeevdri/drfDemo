@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "target": "es2015",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "preserveConstEnums": true,
+    "outDir": "dist"
+  },
+  "include": [
+    "client/src/**/*",
+  ]
+}
