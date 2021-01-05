@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
+from rest_framework import routers, schemas
 
 
 api_router_v1 = routers.DefaultRouter()
@@ -23,5 +23,10 @@ api_router_v1 = routers.DefaultRouter()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1', include(api_router_v1.urls)),
+    path('openapi', schemas.get_schema_view(
+        title="DRF Demo",
+        description="API Schema",
+        version="1.0.0"
+    ), name='openapi-schema'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
