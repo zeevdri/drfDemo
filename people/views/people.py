@@ -19,7 +19,11 @@
    - schema generation
      - run ./manage.py generateschema --file ./client/schema/openapi-schema.yml
    - client code generation
-     -
+     - nvm use v14; node ./node_modules/.bin/openapi-generator-cli generate -i ./client/schema/openapi-schema.yml -o ./client/src -g typescript-axios
+     - ts-node -i
+       > import { ApiApiFactory } from "./client/src";
+       > let api = ApiApiFactory(undefined, "http://127.0.0.1:8000");
+       > api.listPersons().then(r => console.info(r.data));
 """
 from rest_framework import viewsets, pagination
 
