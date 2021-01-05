@@ -22,7 +22,7 @@ api_router_v1 = routers.DefaultRouter()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1', include(api_router_v1.urls)),
+    path('api/v1/', include(api_router_v1.urls)),
     path('openapi', schemas.get_schema_view(
         title="DRF Demo",
         description="API Schema",
