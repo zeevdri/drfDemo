@@ -25,16 +25,3 @@
        > let api = ApiApiFactory(undefined, "http://127.0.0.1:8000");
        > api.listPersons().then(r => console.info(r.data));
 """
-from rest_framework import viewsets, pagination
-
-from people.models import Person
-from people.serializers.people import PersonSerializer
-from people.filters.people import PersonFilterSet
-
-
-class PersonViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Person.objects.all()
-    serializer_class = PersonSerializer
-    pagination_class = pagination.PageNumberPagination
-    # filterset_fields = ("first_name", "last_name",)
-    filterset_class = PersonFilterSet
