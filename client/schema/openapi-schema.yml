@@ -1,0 +1,127 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /api/v1/people/:
+    get:
+      operationId: listPersons
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: first_name
+        required: false
+        in: query
+        description: first_name
+        schema:
+          type: string
+      - name: last_name
+        required: false
+        in: query
+        description: last_name
+        schema:
+          type: string
+      - name: city
+        required: false
+        in: query
+        description: city
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Person'
+          description: ''
+      tags:
+      - api
+  /api/v1/people/{id}/:
+    get:
+      operationId: retrievePerson
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this person.
+        schema:
+          type: string
+      - name: first_name
+        required: false
+        in: query
+        description: first_name
+        schema:
+          type: string
+      - name: last_name
+        required: false
+        in: query
+        description: last_name
+        schema:
+          type: string
+      - name: city
+        required: false
+        in: query
+        description: city
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+          description: ''
+      tags:
+      - api
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+          description: the first name of the person
+        last_name:
+          type: string
+          readOnly: true
+          description: the last name of the person
+        city:
+          type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            name:
+              type: string
+              readOnly: true
+              description: the name of the city
+      required:
+      - city
