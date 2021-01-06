@@ -25,3 +25,26 @@
        > let api = ApiApiFactory(undefined, "http://127.0.0.1:8000");
        > api.listPersons().then(r => console.info(r.data));
 """
+from rest_framework import viewsets, pagination, parsers, renderers
+from rest_framework_csv.renderers import CSVRenderer
+from people.models import Person
+from people.serializers.people import PersonSerializer
+from people.filters.people import PersonFilterSet
+
+
+class PersonViewSet(viewsets.ModelViewSet):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+    pagination_class = pagination.PageNumberPagination
+    # filter_fields = ("first_name", "last_name",)
+    filterset_class = PersonFilterSet
+    renderer_classes = [renderers.JSONRenderer, CSVRenderer]
+
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    def list(self, request, *args, **kwargs):
+
+        return super().list(request, *args, **kwargs)
+
+
